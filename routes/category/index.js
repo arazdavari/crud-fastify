@@ -13,7 +13,8 @@ module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
 
     const categories = await prisma.category.findMany({
-      include: { childs: true, parent: true }
+      include: { childs: true, parent: true },
+      orderBy: { id: 'asc' }
     })
     reply.send(response(1, 200, null, "Categories Sent", categories))
   })
@@ -43,7 +44,8 @@ module.exports = async function (fastify, opts) {
     await prisma.category.create({data: data})
 
     const categories = await prisma.category.findMany({
-      include: { childs: true, parent: true }
+      include: { childs: true, parent: true },
+      orderBy: { id: 'asc' }
     })
     reply.send(response(1, 200, null, "Categoriy Created", categories))
   })
@@ -67,7 +69,8 @@ module.exports = async function (fastify, opts) {
     })
 
     const categories = await prisma.category.findMany({
-      include: { childs: true, parent: true }
+      include: { childs: true, parent: true },
+      orderBy: { id: 'asc' }
     })
     reply.send(response(1, 200, null, "Categoriy Updated", categories))
   })
@@ -82,7 +85,8 @@ module.exports = async function (fastify, opts) {
     })
 
     const categories = await prisma.category.findMany({
-      include: { childs: true, parent: true }
+      include: { childs: true, parent: true },
+      orderBy: { id: 'asc' }
     })
     reply.send(response(1, 200, null, "Categoriy Removed", categories))
   })
